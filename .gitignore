@@ -1,5 +1,5 @@
 node_modules
 # Keep environment variables out of version control
 .env
-
+#https://chatgpt.com/share/68cd5b16-8910-800e-9005-d337a706c667
 /generated/prisma
