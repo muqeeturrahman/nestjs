@@ -18,27 +18,27 @@ let TodosService = class TodosService {
     constructor(repo) {
         this.repo = repo;
     }
-    create(createTodoDto) {
-        const todo = this.repo.create({ ...createTodoDto });
+    async create(createTodoDto) {
+        const todo = await this.repo.create({ ...createTodoDto });
         return todo;
     }
-    findAll() {
+    async findAll() {
         return this.repo.findAll();
     }
-    findOne(id) {
-        const found = this.repo.findOne(id);
+    async findOne(id) {
+        const found = await this.repo.findOne(Number(id));
         if (!found)
             throw new common_1.NotFoundException(`Todo with id ${id} not found`);
         return found;
     }
-    update(id, updateTodoDto) {
-        const updated = this.repo.update(id, updateTodoDto);
+    async update(id, updateTodoDto) {
+        const updated = await this.repo.update(Number(id), updateTodoDto);
         if (!updated)
             throw new common_1.NotFoundException(`Todo with id ${id} not found`);
         return updated;
     }
-    remove(id) {
-        const ok = this.repo.remove(id);
+    async remove(id) {
+        const ok = await this.repo.remove(Number(id));
         if (!ok)
             throw new common_1.NotFoundException(`Todo with id ${id} not found`);
     }

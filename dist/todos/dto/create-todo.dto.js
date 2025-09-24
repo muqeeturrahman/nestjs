@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTodoDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateTodoDto {
     constructor() {
         this.completed = false;
@@ -18,19 +19,27 @@ class CreateTodoDto {
 }
 exports.CreateTodoDto = CreateTodoDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: "title", description: "title of todos" }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 200),
     __metadata("design:type", String)
 ], CreateTodoDto.prototype, "title", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: "start with basics", description: "details about todos" }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(0, 1000),
     __metadata("design:type", String)
 ], CreateTodoDto.prototype, "description", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: false, description: 'Whether the todo is completed' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateTodoDto.prototype, "completed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, description: "ID of the user who owns this todo" }),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], CreateTodoDto.prototype, "userId", void 0);
 //# sourceMappingURL=create-todo.dto.js.map

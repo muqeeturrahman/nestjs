@@ -2,35 +2,36 @@ import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Todo } from './entities/todo.entity';
-import { TodosRepository } from './todos.types';
+import { ITodosRepository } from './todos.types';
+
 
 @Injectable()
 export class TodosService {
-  constructor(@Inject('TodosRepository') private readonly repo: TodosRepository) {}
+  constructor(@Inject('TodosRepository') private readonly repo: ITodosRepository) {}
 
-  create(createTodoDto: CreateTodoDto): Todo {
-    const todo = this.repo.create({ ...createTodoDto });
+  async create(createTodoDto: CreateTodoDto) {
+    const todo = await this.repo.create({ ...createTodoDto });
     return todo;
   }
 
-  findAll(): Todo[] {
+  async findAll() {
     return this.repo.findAll();
   }
 
-  findOne(id: string): Todo {
-    const found = this.repo.findOne(id);
+  async findOne(id: string) {
+    const found = await this.repo.findOne(Number(id));
     if (!found) throw new NotFoundException(`Todo with id ${id} not found`);
     return found;
   }
 
-  update(id: string, updateTodoDto: UpdateTodoDto): Todo {
-    const updated = this.repo.update(id, updateTodoDto);
+  async update(id: string, updateTodoDto: UpdateTodoDto) {
+    const updated = await this.repo.update(Number(id), updateTodoDto);
     if (!updated) throw new NotFoundException(`Todo with id ${id} not found`);
     return updated;
   }
 
-  remove(id: string): void {
-    const ok = this.repo.remove(id);
+  async remove(id: string) {
+    const ok = await this.repo.remove(Number(id));
     if (!ok) throw new NotFoundException(`Todo with id ${id} not found`);
   }
 }

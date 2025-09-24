@@ -9,14 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const todos_module_1 = require("./todos/todos.module");
-const prisma_service_1 = require("./prisma/prisma.service");
+const prisma_module_1 = require("./shared/prisma/prisma.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [todos_module_1.TodosModule],
-        providers: [prisma_service_1.PrismaService],
+        imports: [
+            prisma_module_1.PrismaModule,
+            todos_module_1.TodosModule, users_module_1.UsersModule,
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

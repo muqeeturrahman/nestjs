@@ -11,13 +11,14 @@ const common_1 = require("@nestjs/common");
 const todos_service_1 = require("./todos.service");
 const todos_controller_1 = require("./todos.controller");
 const todos_repository_1 = require("./todos.repository");
+const prisma_service_1 = require("../shared/prisma/prisma.service");
 let TodosModule = class TodosModule {
 };
 exports.TodosModule = TodosModule;
 exports.TodosModule = TodosModule = __decorate([
     (0, common_1.Module)({
         controllers: [todos_controller_1.TodosController],
-        providers: [todos_service_1.TodosService, { provide: 'TodosRepository', useClass: todos_repository_1.InMemoryTodosRepository }],
+        providers: [todos_service_1.TodosService, { provide: 'TodosRepository', useClass: todos_repository_1.TodosRepository }, prisma_service_1.PrismaService],
         exports: [todos_service_1.TodosService],
     })
 ], TodosModule);

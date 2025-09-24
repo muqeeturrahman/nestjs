@@ -1,15 +1,53 @@
-import { Todo } from './entities/todo.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-export interface TodosRepository {
-    constructor(private readonly prisma: PrismaService): any;
-}
-export declare class InMemoryTodosRepository implements TodosRepository {
-    private items;
-    create(data: Partial<CreateTodoDto>): Todo;
-    findAll(): Todo[];
-    findOne(id: string): Todo | undefined;
-    update(id: string, data: Partial<UpdateTodoDto>): Todo | undefined;
-    remove(id: string): boolean;
+import { ITodosRepository } from './todos.types';
+import { PrismaService } from 'src/shared/prisma/prisma.service';
+export declare class TodosRepository implements ITodosRepository {
+    private readonly prisma;
+    constructor(prisma: PrismaService);
+    create(data: CreateTodoDto): Promise<{
+        title: string;
+        description: string | null;
+        completed: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        id: number;
+        userId: number;
+    }>;
+    findAll(): Promise<{
+        title: string;
+        description: string | null;
+        completed: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        id: number;
+        userId: number;
+    }[]>;
+    findOne(id: number): Promise<{
+        title: string;
+        description: string | null;
+        completed: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        id: number;
+        userId: number;
+    }>;
+    update(id: number, data: UpdateTodoDto): Promise<{
+        title: string;
+        description: string | null;
+        completed: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        id: number;
+        userId: number;
+    }>;
+    remove(id: number): Promise<{
+        title: string;
+        description: string | null;
+        completed: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        id: number;
+        userId: number;
+    }>;
 }

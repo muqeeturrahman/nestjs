@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "public"."Todo" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "completed" BOOLEAN NOT NULL DEFAULT false,
